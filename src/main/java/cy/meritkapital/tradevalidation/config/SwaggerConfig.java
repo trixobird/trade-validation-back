@@ -4,7 +4,9 @@ import cy.meritkapital.tradevalidation.properties.SwaggerProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.RequestMethod;
 import springfox.documentation.builders.RequestHandlerSelectors;
+import springfox.documentation.builders.ResponseMessageBuilder;
 import springfox.documentation.service.ApiInfo;
 import springfox.documentation.service.Contact;
 import springfox.documentation.service.Tag;
@@ -16,6 +18,8 @@ import java.time.LocalDate;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
+
+import static com.google.common.collect.Lists.newArrayList;
 
 @Configuration
 @EnableSwagger2
@@ -49,7 +53,6 @@ public class SwaggerConfig {
         return new Docket(DocumentationType.SWAGGER_2)
                 .apiInfo(defaultApiInfo)
                 .tags(new Tag(swaggerProperties.getControllerName(), swaggerProperties.getControllerDescription()))
-                .produces(DEFAULT_PRODUCES_AND_CONSUMES)
                 .consumes(DEFAULT_PRODUCES_AND_CONSUMES)
                 .select()
                 .apis(RequestHandlerSelectors.basePackage("cy.meritkapital.tradevalidation"))
@@ -57,6 +60,11 @@ public class SwaggerConfig {
                 .directModelSubstitute(LocalDate.class, String.class)
                 .genericModelSubstitutes(ResponseEntity.class)
                 .useDefaultResponseMessages(false)
+                .globalResponseMessage(RequestMethod.POST,
+                        newArrayList(new ResponseMessageBuilder()
+                                        .code(400)
+                                        .message("Validation Error")
+                                        .build()))
                 ;
     }
 }

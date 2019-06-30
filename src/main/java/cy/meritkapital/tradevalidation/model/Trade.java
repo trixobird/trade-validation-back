@@ -1,20 +1,25 @@
 package cy.meritkapital.tradevalidation.model;
 
+import io.swagger.annotations.ApiModel;
 import lombok.Data;
 
+import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
 @Data
+@ApiModel(description="Trade Model Detail")
 public class Trade {
     private String customer;
     private String ccyPair;
     private EType type;
     private EDirection direction;
+    @NotNull(message = "Please provide trade date")
     private LocalDate tradeDate;
     private double amount1;
     private double amount2;
     private BigDecimal rate;
+    @NotNull(message = "Please provide value date")
     private LocalDate valueDate;
     private String legalEntity;
     private String trader;
