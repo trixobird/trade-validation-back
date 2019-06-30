@@ -1,7 +1,6 @@
 package cy.meritkapital.tradevalidation.controller;
 
 import cy.meritkapital.tradevalidation.model.Trade;
-import cy.meritkapital.tradevalidation.model.TradeValidationResponse;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -16,7 +15,7 @@ public class TradeValidationController {
 
     @PostMapping("/trade-validation")
     @ApiOperation(value = "Validate Trades", notes = "Accepts Trades in json format and return the validation result")
-    public TradeValidationResponse tradeValidation(@RequestBody List<Trade> trades) {
-        return new TradeValidationResponse(true);
+    public List<Trade> tradeValidation(@RequestBody List<Trade> trades) {
+        return trades;
     }
 }
