@@ -3,6 +3,7 @@ package cy.meritkapital.tradevalidation.model;
 import cy.meritkapital.tradevalidation.validation.*;
 import io.swagger.annotations.ApiModel;
 import lombok.Data;
+import org.apache.tomcat.jni.Local;
 
 import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
@@ -18,6 +19,10 @@ import java.time.LocalDate;
         currencyProperty = "ccyPair",
         message = "Value Date cannot fall on holiday",
         groups = {Extended.class})
+@BetweenDate(smallDate = "tradeDate",
+        givenDate = "excerciseStartDate",
+        bigDate = "expiryDate",
+        message = "Exercise date is not between trade and expiry date")
 public class Trade {
     @SupportedCounterparty
     private String customer;
@@ -41,6 +46,7 @@ public class Trade {
     private LocalDate deliveryDate;
     private LocalDate expiryDate;
     private String payCcy;
+    private LocalDate excerciseStartDate;
     private BigDecimal premium;
     private String premiumCcy;
     private String premiumType;
