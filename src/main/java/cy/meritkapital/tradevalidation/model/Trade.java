@@ -3,7 +3,6 @@ package cy.meritkapital.tradevalidation.model;
 import cy.meritkapital.tradevalidation.validation.*;
 import io.swagger.annotations.ApiModel;
 import lombok.Data;
-import org.apache.tomcat.jni.Local;
 
 import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
@@ -11,6 +10,13 @@ import java.time.LocalDate;
 
 @Data
 @ApiModel(description = "Trade Model Detail")
+@DateAfterDate.List({
+        @DateAfterDate(smallDate = "expiryDate",
+                bigDate = "deliveryDate",
+                message = "expiryDate date is after or equal to deliveryDate"),
+        @DateAfterDate(smallDate = "premiumDate",
+                bigDate = "deliveryDate",
+                message = "premiumDate is after or equal to deliveryDate")})
 @DateAfterOrEqDate(
         smallDate = "tradeDate",
         bigDate = "valueDate",

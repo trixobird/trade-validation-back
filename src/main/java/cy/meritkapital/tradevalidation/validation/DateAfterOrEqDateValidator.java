@@ -27,5 +27,4 @@ public class DateAfterOrEqDateValidator implements ConstraintValidator<DateAfter
                 || bigDate == null
                 || !bigDate.isBefore(smallDate);
     }
-
 }
