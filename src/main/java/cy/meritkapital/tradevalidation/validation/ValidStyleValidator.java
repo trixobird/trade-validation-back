@@ -9,6 +9,10 @@ import javax.validation.ConstraintValidatorContext;
 public class ValidStyleValidator implements ConstraintValidator<ValidStyle, String> {
 
    public boolean isValid(String obj, ConstraintValidatorContext context) {
+
+      if (obj == null) {
+         return true;
+      }
       return EnumUtils.isValidEnum(EStyle.class, obj);
    }
 }

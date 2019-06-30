@@ -41,8 +41,7 @@ public class Trade {
     private double amount1;
     private double amount2;
     private BigDecimal rate;
-    @NotNull(message = "Please provide value dateProperty")
-    @NotOnWeekend(message = " Value dateProperty cannot fall on weekend")
+    @NotOnWeekend(message = "Value dateProperty cannot fall on weekend")
     private LocalDate valueDate;
     private String legalEntity;
     private String trader;

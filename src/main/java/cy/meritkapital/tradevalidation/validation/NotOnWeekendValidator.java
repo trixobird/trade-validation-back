@@ -10,6 +10,9 @@ public class NotOnWeekendValidator implements ConstraintValidator<NotOnWeekend, 
 
     public boolean isValid(LocalDate date, ConstraintValidatorContext context) {
 
+        if (date == null) {
+            return true;
+        }
         DayOfWeek day = DayOfWeek.of(date.get(ChronoField.DAY_OF_WEEK));
         return day != DayOfWeek.SATURDAY
                 && day != DayOfWeek.SUNDAY;

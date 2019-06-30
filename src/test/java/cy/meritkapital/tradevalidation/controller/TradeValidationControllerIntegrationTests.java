@@ -9,6 +9,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.*;
 import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.web.client.HttpClientErrorException;
+import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
 
 import java.io.IOException;
@@ -47,15 +49,18 @@ public class TradeValidationControllerIntegrationTests {
         HttpEntity<String> request = new HttpEntity<>(trades, headers);
 
         // act
-        ResponseEntity<List<Trade>> response = restTemplate.exchange(
-                url,
-                HttpMethod.POST,
-                request,
-                new ParameterizedTypeReference<>(){});
+        try {
+            ResponseEntity<String> response = restTemplate.exchange(
+                    url,
+                    HttpMethod.POST,
+                    request,
+                    new ParameterizedTypeReference<>(){});
+        } catch (RestClientException e) {
+            String[] errors = ((HttpClientErrorException.BadRequest) e)
+                    .getResponseBodyAsString()
+                    .split(",");
 
-        // assert
-        List<Trade> employees = response.getBody();
-        assertNotNull(employees);
-        assertEquals(15, employees.size());
+            assertEquals(10, errors.length);
+        }
     }
 }
