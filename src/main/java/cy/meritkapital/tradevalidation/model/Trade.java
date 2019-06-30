@@ -1,6 +1,7 @@
 package cy.meritkapital.tradevalidation.model;
 
-import cy.meritkapital.tradevalidation.validation.annotation.SupportedCounterparty;
+import cy.meritkapital.tradevalidation.validation.SupportedCounterparty;
+import cy.meritkapital.tradevalidation.validation.DateAfterOrEqDate;
 import io.swagger.annotations.ApiModel;
 import lombok.Data;
 
@@ -10,6 +11,10 @@ import java.time.LocalDate;
 
 @Data
 @ApiModel(description="Trade Model Detail")
+@DateAfterOrEqDate(
+        smallDate = "tradeDate",
+        bigDate = "valueDate",
+        message = "Value date cannot be before trade date")
 public class Trade {
     @SupportedCounterparty
     private String customer;

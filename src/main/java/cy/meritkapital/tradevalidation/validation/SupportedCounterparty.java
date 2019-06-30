@@ -1,6 +1,4 @@
-package cy.meritkapital.tradevalidation.validation.annotation;
-
-import cy.meritkapital.tradevalidation.validation.SupportedCounterpartyValidator;
+package cy.meritkapital.tradevalidation.validation;
 
 import javax.validation.Constraint;
 import javax.validation.Payload;

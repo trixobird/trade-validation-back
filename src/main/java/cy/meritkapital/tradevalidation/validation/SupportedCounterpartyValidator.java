@@ -1,7 +1,6 @@
 package cy.meritkapital.tradevalidation.validation;
 
 import cy.meritkapital.tradevalidation.properties.TradeProperties;
-import cy.meritkapital.tradevalidation.validation.annotation.SupportedCounterparty;
 
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
