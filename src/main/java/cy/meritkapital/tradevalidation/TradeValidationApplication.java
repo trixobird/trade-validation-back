@@ -5,7 +5,6 @@ import cy.meritkapital.tradevalidation.properties.TradeProperties;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
-import org.springframework.cache.annotation.EnableCaching;
 
 @SpringBootApplication
 @EnableConfigurationProperties({SwaggerProperties.class, TradeProperties.class})

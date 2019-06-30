@@ -50,7 +50,7 @@ public class TradeValidationControllerIntegrationTests {
 
         // act
         try {
-            ResponseEntity<String> response = restTemplate.exchange(
+            restTemplate.exchange(
                     url,
                     HttpMethod.POST,
                     request,

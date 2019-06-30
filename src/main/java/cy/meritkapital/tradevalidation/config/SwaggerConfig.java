@@ -5,7 +5,6 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMethod;
-import springfox.documentation.builders.RequestHandlerSelectors;
 import springfox.documentation.builders.ResponseMessageBuilder;
 import springfox.documentation.service.ApiInfo;
 import springfox.documentation.service.Contact;
@@ -20,6 +19,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 import static com.google.common.collect.Lists.newArrayList;
+import static springfox.documentation.builders.PathSelectors.regex;
 
 @Configuration
 @EnableSwagger2
@@ -55,7 +55,7 @@ public class SwaggerConfig {
                 .tags(new Tag(swaggerProperties.getControllerName(), swaggerProperties.getControllerDescription()))
                 .consumes(DEFAULT_PRODUCES_AND_CONSUMES)
                 .select()
-                .apis(RequestHandlerSelectors.basePackage("cy.meritkapital.tradevalidation"))
+                .paths(regex("/actuator/shutdown*"))
                 .build()
                 .directModelSubstitute(LocalDate.class, String.class)
                 .genericModelSubstitutes(ResponseEntity.class)
