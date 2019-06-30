@@ -1,5 +1,7 @@
 package cy.meritkapital.tradevalidation.model;
 
+import cy.meritkapital.tradevalidation.validation.NotHoliday;
+import cy.meritkapital.tradevalidation.validation.NotOnWeekend;
 import cy.meritkapital.tradevalidation.validation.SupportedCounterparty;
 import cy.meritkapital.tradevalidation.validation.DateAfterOrEqDate;
 import io.swagger.annotations.ApiModel;
@@ -14,19 +16,21 @@ import java.time.LocalDate;
 @DateAfterOrEqDate(
         smallDate = "tradeDate",
         bigDate = "valueDate",
-        message = "Value date cannot be before trade date")
+        message = "Value dateProperty cannot be before trade dateProperty")
+@NotHoliday(dateProperty = "valueDate", currencyProperty = "ccyPair")
 public class Trade {
     @SupportedCounterparty
     private String customer;
     private String ccyPair;
     private EType type;
     private EDirection direction;
-    @NotNull(message = "Please provide trade date")
+    @NotNull(message = "Please provide trade dateProperty")
     private LocalDate tradeDate;
     private double amount1;
     private double amount2;
     private BigDecimal rate;
-    @NotNull(message = "Please provide value date")
+    @NotNull(message = "Please provide value dateProperty")
+    @NotOnWeekend(message = " Value dateProperty cannot fall on weekend")
     private LocalDate valueDate;
     private String legalEntity;
     private String trader;

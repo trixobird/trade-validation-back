@@ -12,7 +12,7 @@ import java.lang.annotation.Target;
 @Retention(RetentionPolicy.RUNTIME)
 public @interface DateAfterOrEqDate {
 
-    String message() default "Small Date is after big date";
+    String message() default "Small Date is after big dateProperty";
     Class<?>[] groups() default {};
     Class<? extends Payload>[] payload() default {};
 
