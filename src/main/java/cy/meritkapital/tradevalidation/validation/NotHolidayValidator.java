@@ -5,10 +5,8 @@ import org.springframework.beans.BeanWrapperImpl;
 
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
-import java.lang.reflect.Array;
 import java.time.LocalDate;
 import java.util.Arrays;
-import java.util.List;
 
 public class NotHolidayValidator implements ConstraintValidator<NotHoliday, Object> {
 

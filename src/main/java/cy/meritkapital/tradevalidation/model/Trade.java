@@ -1,9 +1,6 @@
 package cy.meritkapital.tradevalidation.model;
 
-import cy.meritkapital.tradevalidation.validation.NotHoliday;
-import cy.meritkapital.tradevalidation.validation.NotOnWeekend;
-import cy.meritkapital.tradevalidation.validation.SupportedCounterparty;
-import cy.meritkapital.tradevalidation.validation.DateAfterOrEqDate;
+import cy.meritkapital.tradevalidation.validation.*;
 import io.swagger.annotations.ApiModel;
 import lombok.Data;
 
@@ -12,15 +9,19 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 
 @Data
-@ApiModel(description="Trade Model Detail")
+@ApiModel(description = "Trade Model Detail")
 @DateAfterOrEqDate(
         smallDate = "tradeDate",
         bigDate = "valueDate",
         message = "Value dateProperty cannot be before trade dateProperty")
-@NotHoliday(dateProperty = "valueDate", currencyProperty = "ccyPair")
+@NotHoliday(dateProperty = "valueDate",
+        currencyProperty = "ccyPair",
+        message = "Value Date cannot fall on holiday",
+        groups = {Extended.class})
 public class Trade {
     @SupportedCounterparty
     private String customer;
+    @ValidCurrency
     private String ccyPair;
     private EType type;
     private EDirection direction;
