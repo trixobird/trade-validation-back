@@ -35,7 +35,8 @@ public class Trade {
     private LocalDate valueDate;
     private String legalEntity;
     private String trader;
-    private EStyle style;
+    @ValidStyle
+    private String style;
     private EStrategy strategy;
     private LocalDate deliveryDate;
     private LocalDate expiryDate;
